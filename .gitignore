@@ -24,11 +24,13 @@ MANIFEST.MF
 _site/
 activemq-data
 bin
-build
 !/**/src/**/bin
 !/**/src/**/build
-!/build/libs/
+build/*
+!build/libs/
+
 !/build/libs/*.jar
+
 build.log
 dependency-reduced-pom.xml
 dump.rdb
