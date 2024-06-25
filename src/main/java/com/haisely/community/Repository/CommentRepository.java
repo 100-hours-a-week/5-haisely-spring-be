@@ -9,8 +9,4 @@ public interface CommentRepository {
     Optional<Comment> findCommentById(int id);;
 
     List<Comment> findCommentsByBoardId(int id);
-
-    void save(Comment comment);
-
-    void delete(Comment comment);
 }

@@ -9,8 +9,4 @@ public interface BoardRepository {
     List<Board> findAllBoards();
 
     Optional<Board> findBoardById(int id);
-
-    void save(Board board);
-
-    void delete(Board board);
 }
