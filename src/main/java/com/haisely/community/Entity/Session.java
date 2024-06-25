@@ -1,7 +1,6 @@
 package com.haisely.community.Entity;
 
-import jakarta.persistence.Entity;
 
-@Entity
+// 인증 인가는 추후 구현
 public class Session {
 }
