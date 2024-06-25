@@ -1,30 +1,38 @@
 package com.haisely.community.Entity;
 
-import jakarta.persistence.Entity;
-//
-//
-//@Entity
-//@Table(name = "users")
-//public class Users {
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private int id;
-//
-//    @Column(name = "name", nullable = false)
-//    private String name;
-//
-//    @Column(name = "email", nullable = false)
-//    private String email;
-//
-//    @Column(name = "phone", nullable = false)
-//    private String phone;
-//
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    private Department department;
-//
-//    // 기본 생성자
-//    public User() {}
-//
-//    // 기타 생성자 및 Setter 등..
-//}
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.sql.Timestamp;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "users")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "nickname", nullable = false)
+    private String nickname;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @ManyToOne
+    @JoinColumn(name="image_id")
+    private Image image;
+
+    @Column(name = "created_at")
+    private Timestamp createdAt;
+
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
+
+    @Column(name = "deleted_at")
+    private Timestamp deletedAt;
+
+}
