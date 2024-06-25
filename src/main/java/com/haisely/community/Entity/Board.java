@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "comments")
+@Table(name = "boards")
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +25,11 @@ public class Board {
     @JoinColumn(name="image_id")
     private Image image;
 
-    @OneToMany(mappedBy = "comments")
+    @OneToMany(mappedBy = "board")
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToOne(mappedBy = "board")
+    private BoardHit boardHit;
 
     @Column(name = "title", nullable = false)
     private String title;
