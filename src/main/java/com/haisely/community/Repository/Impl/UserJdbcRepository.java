@@ -1,0 +1,34 @@
+package com.haisely.community.Repository.Impl;
+
+import com.haisely.community.Entity.User;
+import com.haisely.community.Repository.UserRepository;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+import javax.sql.DataSource;
+import java.util.Optional;
+
+// jdbc 구현은 jpa 테스트 한 다음에 함~~
+public class UserJdbcRepository implements UserRepository {
+
+    private final JdbcTemplate template;
+
+    public UserJdbcRepository(DataSource dataSource){
+        this.template = new JdbcTemplate(dataSource);
+    }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findUserById(int id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findUserByNickname(String nickname) {
+        return Optional.empty();
+    }
+}

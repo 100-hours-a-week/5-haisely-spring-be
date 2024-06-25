@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BoardRepository {
-    List<Board> findAll();
+    List<Board> findAllBoards();
 
     Optional<Board> findBoardById(int id);
+
+    void save(Board board);
+
+    void delete(Board board);
 }
