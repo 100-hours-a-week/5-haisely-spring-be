@@ -2,6 +2,8 @@ package com.haisely.community.Service.Impl;
 
 import com.haisely.community.DTO.Board.BoardDTO;
 import com.haisely.community.DTO.Board.BoardDetailDTO;
+import com.haisely.community.DTO.Board.BoardIdDTO;
+import com.haisely.community.DTO.Board.NewBoardReqDTO;
 import com.haisely.community.Entity.Board;
 import com.haisely.community.Entity.Comment;
 import com.haisely.community.Exception.ResourceNotFoundException;
@@ -49,4 +51,11 @@ public class BoardServiceImpl implements BoardService {
 
         return dto;
     }
+
+    @Override
+    public BoardIdDTO saveBoard(NewBoardReqDTO req) {
+        return null;
+    }
+
+
 }
