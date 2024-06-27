@@ -1,5 +1,6 @@
 package com.haisely.community.Mapper;
 
+import com.haisely.community.DTO.Board.BoardIdDTO;
 import com.haisely.community.Entity.Board;
 import com.haisely.community.DTO.Board.BoardDTO;
 import com.haisely.community.DTO.Comment.CommentDTO;
@@ -22,4 +23,7 @@ public interface BoardMapper {
     @Mapping(source = "user.nickname", target = "nickname")
     @Mapping(source = "user.image.fileUrl", target = "profileImage")
     CommentDTO toCommentDTO(Comment comment);
+
+    @Mapping(source = "id", target = "boardId")
+    BoardIdDTO toBoardIdDTO(Board board);
 }
