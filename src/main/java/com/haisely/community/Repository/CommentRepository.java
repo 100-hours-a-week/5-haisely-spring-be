@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CommentRepository {
-    Optional<Comment> findCommentById(int id);;
+    Optional<Comment> findCommentByIdAndDeletedAtIsNull(int id);;
 
-    List<Comment> findCommentsByBoardId(int id);
+    List<Comment> findCommentsByBoardIdAndDeletedAtIsNull(int id);
 }

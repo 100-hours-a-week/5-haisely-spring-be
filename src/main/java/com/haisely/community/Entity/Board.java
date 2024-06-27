@@ -26,8 +26,8 @@ public class Board {
     @JoinColumn(name="image_id")
     private Image image;
 
-    @OneToMany(mappedBy = "board")
-    private List<Comment> comments = new ArrayList<>();
+//    @OneToMany(mappedBy = "board")
+//    private List<Comment> comments = new ArrayList<>();
 
     @OneToOne(mappedBy = "board")
     private BoardHit boardHit;

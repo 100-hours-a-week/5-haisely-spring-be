@@ -31,7 +31,7 @@ public class BoardServiceRealRepTest {
         List<BoardDTO> boards = boardService.getBoards();
 
         // Then: 결과 검증
-        assertEquals(5, boards.size());
+        assertEquals(3, boards.size());
 
         boards.forEach(board -> {
             System.out.println("Board ID: " + board.getBoardId());

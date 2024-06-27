@@ -1,6 +1,5 @@
 package com.haisely.community.DTO.Board;
 
-import com.haisely.community.Entity.Board;
 import lombok.Getter;
 import lombok.Setter;
 

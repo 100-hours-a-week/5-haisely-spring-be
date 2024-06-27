@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BoardRepository {
-    List<Board> findAll();
+    List<Board> findAllByDeletedAtIsNull();
 
-    Optional<Board> findBoardById(int id);
+    Optional<Board> findByIdAndDeletedAtIsNull(int id);
 }

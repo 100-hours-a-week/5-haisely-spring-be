@@ -27,7 +27,7 @@ public class BoardServiceMockRepTest {
     @Test
     public void 보드_조회() throws Exception{
         List<Board> mockBoards = Arrays.asList(new Board(), new Board(), new Board(), new Board(), new Board());
-        when(boardRepository.findAll()).thenReturn(mockBoards);
+        when(boardRepository.findAllByDeletedAtIsNull()).thenReturn(mockBoards);
 
 //        List<Board> boards = boardService.getBoards();
 //        assertEquals(boards.size(), 5);
