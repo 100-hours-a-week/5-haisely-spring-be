@@ -11,6 +11,7 @@ import lombok.Setter;
 public class BoardHit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "board_hit_id")
     private int id;
 
     @OneToOne

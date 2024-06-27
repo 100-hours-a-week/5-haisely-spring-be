@@ -3,7 +3,6 @@ package com.haisely.community.service;
 import com.haisely.community.Entity.Board;
 import com.haisely.community.Repository.BoardRepository;
 import com.haisely.community.Service.BoardService;
-import com.haisely.community.Service.Impl.BoardServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,24 +10,27 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class BoardServiceTest {
 
     @InjectMocks
-    private BoardServiceImpl boardService;
+    private BoardService boardService;
 
     @Mock
     private BoardRepository boardRepository;
 
     @Test
     public void 보드_조회() throws Exception{
+        List<Board> mockBoards = Arrays.asList(new Board(), new Board(), new Board(), new Board(), new Board());
+        when(boardRepository.findAll()).thenReturn(mockBoards);
+
         List<Board> boards = boardService.getBoards();
-        List<Board> _test = new ArrayList<>();
-        assertEquals(boards, _test);
         assertEquals(boards.size(), 5);
     }
 
