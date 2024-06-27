@@ -16,6 +16,6 @@ public class BoardDTO {
     private String boardImage;
     private int hit;
     private Timestamp createdAt;
-    private Timestamp updated;
+    private Timestamp updatedAt;
     private Timestamp deletedAt;
 }

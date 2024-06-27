@@ -7,6 +7,7 @@ import com.haisely.community.DTO.Board.NewBoardReqDTO;
 import com.haisely.community.Entity.Board;
 import com.haisely.community.Entity.Comment;
 import com.haisely.community.Exception.ResourceNotFoundException;
+import com.haisely.community.Mapper.BoardMapper;
 import com.haisely.community.Repository.BoardRepository;
 import com.haisely.community.Repository.CommentRepository;
 import com.haisely.community.Service.BoardService;
@@ -21,18 +22,20 @@ import java.util.stream.Collectors;
 public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
     private final CommentRepository commentRepository;
+    private final BoardMapper boardMapper;
 
     @Autowired
-    public BoardServiceImpl(BoardRepository boardRepository, CommentRepository commentRepository) {
+    public BoardServiceImpl(BoardRepository boardRepository, CommentRepository commentRepository, BoardMapper boardMapper) {
         this.boardRepository = boardRepository;
         this.commentRepository = commentRepository;
+        this.boardMapper = boardMapper;
     }
 
     @Override
     public List<BoardDTO> getBoards() {
         List<Board> boards = boardRepository.findAllByDeletedAtIsNull();
         return boards.stream()
-                .map(DTOConverter::toBoardDTO)
+                .map(boardMapper::toBoardDTO)
                 .collect(Collectors.toList());
     }
 
@@ -42,11 +45,11 @@ public class BoardServiceImpl implements BoardService {
                 .orElseThrow(() -> new ResourceNotFoundException("Board not found with id " + id));
 
         BoardDetailDTO dto = new BoardDetailDTO();
-        dto.setBoard(DTOConverter.toBoardDTO(board));
+        dto.setBoard(boardMapper.toBoardDTO(board));
 
         List<Comment> comments = commentRepository.findCommentsByBoardIdAndDeletedAtIsNull(id);
         dto.setComments(comments.stream()
-                .map(DTOConverter::toCommentDTO)
+                .map(boardMapper::toCommentDTO)
                 .collect(Collectors.toList()));
 
         return dto;
