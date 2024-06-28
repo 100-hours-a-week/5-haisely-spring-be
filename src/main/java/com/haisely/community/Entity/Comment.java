@@ -2,12 +2,13 @@ package com.haisely.community.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "comments")
 public class Comment {
 

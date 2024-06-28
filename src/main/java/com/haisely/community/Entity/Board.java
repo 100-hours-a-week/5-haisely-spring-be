@@ -1,16 +1,14 @@
 package com.haisely.community.Entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "boards")
 public class Board {
     @Id
@@ -18,10 +16,12 @@ public class Board {
     @Column(name = "board_id")
     private int id;
 
+    @With
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
 
+    @With
     @OneToOne
     @JoinColumn(name="image_id")
     private Image image;
@@ -29,9 +29,11 @@ public class Board {
     @OneToOne(mappedBy = "board")
     private BoardHit boardHit;
 
+    @With
     @Column(name = "title", nullable = false)
     private String title;
 
+    @With
     @Column(name = "content", nullable = false)
     private String content;
 
@@ -45,9 +47,9 @@ public class Board {
     private Timestamp deletedAt;
 
     @Builder
-    public Board(User u, Image i, String title, String content){
-        this.user = u;
-        this.image = i;
+    public Board(User user, Image image, String title, String content){
+        this.user = user;
+        this.image = image;
         this.title = title;
         this.content = content;
     }

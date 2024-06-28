@@ -4,9 +4,7 @@ import com.haisely.community.DTO.Board.BoardDTO;
 import com.haisely.community.DTO.Board.BoardDetailDTO;
 import com.haisely.community.DTO.Board.BoardIdDTO;
 import com.haisely.community.DTO.Board.NewBoardReqDTO;
-import com.haisely.community.Entity.Board;
-import com.haisely.community.Entity.Comment;
-import com.haisely.community.Entity.User;
+import com.haisely.community.Entity.*;
 import com.haisely.community.Exception.ResourceNotFoundException;
 import com.haisely.community.Mapper.BoardMapper;
 import com.haisely.community.Repository.*;
@@ -67,17 +65,18 @@ public class BoardServiceImpl implements BoardService {
         // user 찾아서 넣기  (jwt 토큰 활용) >>>  수정 필요
         User u = userRepository.findUserByIdAndDeletedAtIsNull(1)
                 .orElseThrow(()-> new ResourceNotFoundException("User not found with id 1"));
+        b = b.withUser(u);
         if (req.getAttachFilePath() != null){
-
-            // 사진 저장하고 image 가져오기
-            // b에 이미지 저장
+            Image i = Image.builder()
+                    .fileUrl(req.getAttachFilePath())
+                    .build();
+            b = b.withImage(i);
         }
-        // board hit 만들고 지정하기
-
-
-
-        return null;
+        Board board = boardRepository.save(b);
+        BoardHit bh = BoardHit.builder()
+                .board(board)
+                .build();
+        boardHitRepository.save(bh);
+        return boardMapper.toBoardIdDTO(board);
     }
-
-
 }

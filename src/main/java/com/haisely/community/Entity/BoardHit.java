@@ -1,11 +1,12 @@
 package com.haisely.community.Entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "board_hits")
 public class BoardHit {
     @Id
@@ -17,6 +18,12 @@ public class BoardHit {
     @JoinColumn(name="board_id")
     private Board board;
 
+    @With
     @Column(name = "hit", nullable = false)
-    private int hit;
+    private int hit = 0;
+
+    @Builder
+    public BoardHit(Board board){
+        this.board = board;
+    }
 }

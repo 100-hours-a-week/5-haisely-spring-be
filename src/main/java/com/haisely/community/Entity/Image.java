@@ -1,11 +1,13 @@
 package com.haisely.community.Entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "images")
 public class Image {
 
@@ -16,4 +18,9 @@ public class Image {
 
     @Column(name = "file_url", nullable = false)
     private String fileUrl;
+
+    @Builder
+    public Image(String fileUrl){
+        this.fileUrl = fileUrl;
+    }
 }

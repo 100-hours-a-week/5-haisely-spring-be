@@ -28,12 +28,7 @@ public interface BoardMapper {
     @Mapping(source = "id", target = "boardId")
     BoardIdDTO toBoardIdDTO(Board board);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "deletedAt", ignore = true)
     @Mapping(target = "user", ignore = true)
-    @Mapping(target = "boardHit", ignore = true)
     @Mapping(target = "image", ignore = true)
     Board toBoard(NewBoardReqDTO newBoardReqDTO);
 }

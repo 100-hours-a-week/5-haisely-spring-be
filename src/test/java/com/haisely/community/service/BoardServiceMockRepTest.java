@@ -1,5 +1,6 @@
 package com.haisely.community.service;
 
+import com.haisely.community.DTO.Board.BoardDTO;
 import com.haisely.community.Entity.Board;
 import com.haisely.community.Repository.BoardRepository;
 import com.haisely.community.Service.BoardService;
@@ -26,11 +27,12 @@ public class BoardServiceMockRepTest {
 
     @Test
     public void 보드_조회() throws Exception{
-        List<Board> mockBoards = Arrays.asList(new Board(), new Board(), new Board(), new Board(), new Board());
-        when(boardRepository.findAllByDeletedAtIsNull()).thenReturn(mockBoards);
 
-//        List<Board> boards = boardService.getBoards();
-//        assertEquals(boards.size(), 5);
+//        List<Board> mockBoards = Arrays.asList(new Board(), new Board(), new Board(), new Board(), new Board());
+//        when(boardRepository.findAllByDeletedAtIsNull()).thenReturn(mockBoards);
+//
+//        List<BoardDTO> boards = boardService.getBoards();
+//        assertEquals(boards.size(), 0);
     }
 
 //    @Test
