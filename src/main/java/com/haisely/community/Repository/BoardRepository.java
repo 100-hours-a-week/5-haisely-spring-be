@@ -9,4 +9,6 @@ public interface BoardRepository {
     List<Board> findAllByDeletedAtIsNull();
 
     Optional<Board> findByIdAndDeletedAtIsNull(int id);
+
+    Board save(Board board);
 }

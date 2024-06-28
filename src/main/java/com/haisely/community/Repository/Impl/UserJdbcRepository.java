@@ -20,17 +20,17 @@ public class UserJdbcRepository implements UserRepository {
     }
 
     @Override
-    public Optional<User> findUserByEmail(String email) {
+    public Optional<User> findUserByEmailAndDeletedAtIsNull(String email) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<User> findUserById(int id) {
+    public Optional<User> findUserByIdAndDeletedAtIsNull(int id) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<User> findUserByNickname(String nickname) {
+    public Optional<User> findUserByNicknameAndDeletedAtIsNull(String nickname) {
         return Optional.empty();
     }
 }
