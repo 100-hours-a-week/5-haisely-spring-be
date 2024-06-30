@@ -4,7 +4,6 @@ import com.haisely.community.Entity.User;
 import com.haisely.community.Mapper.UserMapper;
 import com.haisely.community.Repository.UserRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -15,11 +14,8 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.Timestamp;
-import java.util.Map;
 import java.util.Optional;
 
-// jdbc 구현은 jpa 테스트 한 다음에 함~~
 @Repository
 public class UserJdbcRepository implements UserRepository {
     private final NamedParameterJdbcTemplate template;
@@ -72,7 +68,6 @@ public class UserJdbcRepository implements UserRepository {
         }
     }
 
-
     @Override
     public User save(User user) {
         String sql = "INSERT INTO users (image_id, nickname, email, password, created_at, updated_at)" +
@@ -96,12 +91,21 @@ public class UserJdbcRepository implements UserRepository {
 
     @Override
     public void updateContent(User user) {
-
+        String sql = "UPDATE users u set u.image_id = :image.id, u.nickname = :nickname WHERE u.user_id = :id";
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", user.getId());
+        params.addValue("image.id", user.getImage().getId());
+        params.addValue("nickname", user.getNickname());
+        template.update(sql, params);
     }
 
     @Override
     public void updatePassword(User user) {
-
+        String sql = "UPDATE users u set u.password = :password WHERE u.user_id = :id";
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("id", user.getId());
+        params.addValue("password", user.getPassword());
+        template.update(sql, params);
     }
 
     @Override

@@ -67,4 +67,29 @@ public class UserRepositoryTest {
         Optional<User> deletedUser = userRepository.findUserByIdAndDeletedAtIsNull(saved.getId());
         assertFalse(deletedUser.isPresent());
     }
+
+    @Test
+    public void 사용자_정보_수정() throws Exception{
+        Image i = imageRepository.findById(1).get();
+        User u = User.builder()
+                .email("testemail")
+                .image(i)
+                .nickname("test")
+                .password("testpass")
+                .build();
+        User saved = userRepository.save(u);
+        User findUser = userRepository.findUserByIdAndDeletedAtIsNull(saved.getId()).get();
+        System.out.println(findUser.getUpdatedAt());
+
+        User edit = saved.withNickname("edited");
+        edit = edit.withPassword("newPass");
+        userRepository.updateContent(edit);
+        userRepository.updatePassword(edit);
+
+        User editedUser = userRepository.findUserByIdAndDeletedAtIsNull(saved.getId()).get();
+        assertEquals("edited", editedUser.getNickname());
+        assertEquals("newPass", editedUser.getPassword());
+
+        System.out.println(editedUser.getUpdatedAt());
+    }
 }
