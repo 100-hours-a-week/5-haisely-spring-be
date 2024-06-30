@@ -1,5 +1,7 @@
 package com.haisely.community.repository;
 
+import com.haisely.community.Entity.Image;
+import com.haisely.community.Repository.ImageRepository;
 import com.haisely.community.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,9 @@ public class UserRepositoryTest {
     private UserRepository userRepository;
 
     @Autowired
+    private ImageRepository imageRepository;
+
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Test
@@ -28,4 +33,19 @@ public class UserRepositoryTest {
         User u = userRepository.findUserByIdAndDeletedAtIsNull(1).get();
         assertEquals(u.getNickname(), "user1");
     }
+
+    @Test
+    public void 사용자_추가() throws Exception{
+        Image i = imageRepository.findById(1).get();
+        User u = User.builder()
+                .email("testemail")
+                .image(i)
+                .nickname("test")
+                .password("testpass")
+                .build();
+        User saved = userRepository.save(u);
+        User findUser = userRepository.findUserByIdAndDeletedAtIsNull(saved.getId()).get();
+        assertEquals(saved.getNickname(), findUser.getNickname());
+    }
+    
 }

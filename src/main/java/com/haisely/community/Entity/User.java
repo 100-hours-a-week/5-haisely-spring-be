@@ -34,10 +34,10 @@ public class User {
     private Image image;
 
     @Column(name = "created_at")
-    private Timestamp createdAt;
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());;
 
     @Column(name = "updated_at")
-    private Timestamp updatedAt;
+    private Timestamp updatedAt = new Timestamp(System.currentTimeMillis());;
 
     @Column(name = "deleted_at")
     private Timestamp deletedAt;
