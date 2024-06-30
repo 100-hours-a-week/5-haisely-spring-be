@@ -3,6 +3,7 @@ package com.haisely.community.Repository.Impl;
 import com.haisely.community.Entity.User;
 import com.haisely.community.Mapper.UserMapper;
 import com.haisely.community.Repository.UserRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -35,8 +36,12 @@ public class UserJdbcRepository implements UserRepository {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("email", email);
 
-        User user = template.queryForObject(sql, params, userMapper.defaultUserMapper());
-        return Optional.ofNullable(user);
+        try {
+            User user = template.queryForObject(sql, params, userMapper.defaultUserMapper());
+            return Optional.ofNullable(user);
+        }catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     @Override
@@ -45,8 +50,12 @@ public class UserJdbcRepository implements UserRepository {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("id", id);
 
-        User user = template.queryForObject(sql, params, userMapper.defaultUserMapper());
-        return Optional.ofNullable(user);
+        try {
+            User user = template.queryForObject(sql, params, userMapper.defaultUserMapper());
+            return Optional.ofNullable(user);
+        }catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
     @Override
@@ -55,8 +64,12 @@ public class UserJdbcRepository implements UserRepository {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("nickname", nickname);
 
-        User user = template.queryForObject(sql, params, userMapper.defaultUserMapper());
-        return Optional.ofNullable(user);
+        try {
+            User user = template.queryForObject(sql, params, userMapper.defaultUserMapper());
+            return Optional.ofNullable(user);
+        }catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
     }
 
 
@@ -93,7 +106,7 @@ public class UserJdbcRepository implements UserRepository {
 
     @Override
     public void deleteById(int id) {
-        String sql = "UPDATE users u set u.deleted_at = CURRENT_TIMESTAMP WHERE u.user_id = ?";
+        String sql = "UPDATE users u set u.deleted_at = CURRENT_TIMESTAMP WHERE u.user_id = :id";
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("id", id);
         template.update(sql, params);

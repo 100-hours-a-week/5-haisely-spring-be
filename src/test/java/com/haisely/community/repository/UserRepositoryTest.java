@@ -13,7 +13,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import com.haisely.community.Entity.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -47,5 +49,22 @@ public class UserRepositoryTest {
         User findUser = userRepository.findUserByIdAndDeletedAtIsNull(saved.getId()).get();
         assertEquals(saved.getNickname(), findUser.getNickname());
     }
-    
+
+    @Test
+    public void 사용자_삭제() throws Exception{
+        Image i = imageRepository.findById(1).get();
+        User u = User.builder()
+                .email("testemail")
+                .image(i)
+                .nickname("test")
+                .password("testpass")
+                .build();
+        User saved = userRepository.save(u);
+        User findUser = userRepository.findUserByIdAndDeletedAtIsNull(saved.getId()).get();
+        assertEquals(saved.getNickname(), findUser.getNickname());
+
+        userRepository.deleteById(saved.getId());
+        Optional<User> deletedUser = userRepository.findUserByIdAndDeletedAtIsNull(saved.getId());
+        assertFalse(deletedUser.isPresent());
+    }
 }
