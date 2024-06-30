@@ -10,4 +10,14 @@ public interface UserRepository {
     Optional<User> findUserByIdAndDeletedAtIsNull(int id);
 
     Optional<User> findUserByNicknameAndDeletedAtIsNull(String nickname);
+
+    User save(User user);
+
+    void updateContent(User user);
+
+    void updatePassword(User user);
+
+    void deleteById(int id);
+
+
 }
