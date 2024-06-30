@@ -11,4 +11,6 @@ public interface BoardRepository {
     Optional<Board> findByIdAndDeletedAtIsNull(int id);
 
     Board save(Board board);
+
+    void update(Board board);
 }

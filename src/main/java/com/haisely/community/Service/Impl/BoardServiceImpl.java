@@ -72,6 +72,7 @@ public class BoardServiceImpl implements BoardService {
                     .build();
             b = b.withImage(i);
         }
+        // jpa의 dirty checking 기능이 있음
         Board board = boardRepository.save(b);
         BoardHit bh = BoardHit.builder()
                 .board(board)

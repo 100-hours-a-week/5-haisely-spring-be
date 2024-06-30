@@ -4,6 +4,7 @@ import com.haisely.community.DTO.Board.BoardDTO;
 import com.haisely.community.Entity.Board;
 import com.haisely.community.Repository.BoardRepository;
 import com.haisely.community.Service.BoardService;
+import com.haisely.community.Service.Impl.BoardServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,7 +21,7 @@ import static org.mockito.Mockito.when;
 public class BoardServiceMockRepTest {
 
     @InjectMocks
-    private BoardService boardService;
+    private BoardServiceImpl boardService;
 
     @Mock
     private BoardRepository boardRepository;
@@ -28,11 +29,11 @@ public class BoardServiceMockRepTest {
     @Test
     public void 보드_조회() throws Exception{
 
-//        List<Board> mockBoards = Arrays.asList(new Board(), new Board(), new Board(), new Board(), new Board());
-//        when(boardRepository.findAllByDeletedAtIsNull()).thenReturn(mockBoards);
-//
-//        List<BoardDTO> boards = boardService.getBoards();
-//        assertEquals(boards.size(), 0);
+        List<Board> mockBoards = Arrays.asList(new Board(), new Board(), new Board(), new Board(), new Board());
+        when(boardRepository.findAllByDeletedAtIsNull()).thenReturn(mockBoards);
+
+        List<BoardDTO> boards = boardService.getBoards();
+        assertEquals(boards.size(), 0);
     }
 
 //    @Test

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Transactional
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+//@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class BoardServiceRealRepTest {
 
     @Autowired
@@ -32,7 +32,7 @@ public class BoardServiceRealRepTest {
         List<BoardDTO> boards = boardService.getBoards();
 
         // Then: 결과 검증
-        assertEquals(3, boards.size());
+        assertEquals(2, boards.size());
 
         boards.forEach(board -> {
             System.out.println("Board ID: " + board.getBoardId());

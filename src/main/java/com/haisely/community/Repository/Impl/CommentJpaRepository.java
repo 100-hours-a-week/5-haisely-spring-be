@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommentJpaRepository extends JpaRepository<Comment, Integer>, CommentRepository {
-    // deleted null인 애들만 긁어와야함
 }
