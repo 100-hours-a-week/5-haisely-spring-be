@@ -1,7 +1,7 @@
 package com.haisely.community.Repository.Impl;
 
 import com.haisely.community.Entity.User;
-import com.haisely.community.Mapper.UserMapper;
+import com.haisely.community.Mapper.UserJdbcMapper;
 import com.haisely.community.Repository.UserRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -19,11 +19,11 @@ import java.util.Optional;
 @Repository
 public class UserJdbcRepository implements UserRepository {
     private final NamedParameterJdbcTemplate template;
-    private final UserMapper userMapper;
+    private final UserJdbcMapper userJdbcMapper;
 
-    public UserJdbcRepository(DataSource dataSource, UserMapper userMapper){
+    public UserJdbcRepository(DataSource dataSource, UserJdbcMapper userJdbcMapper){
         this.template = new NamedParameterJdbcTemplate(dataSource);
-        this.userMapper = userMapper;
+        this.userJdbcMapper = userJdbcMapper;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class UserJdbcRepository implements UserRepository {
         params.addValue("email", email);
 
         try {
-            User user = template.queryForObject(sql, params, userMapper.defaultUserMapper());
+            User user = template.queryForObject(sql, params, userJdbcMapper.defaultUserMapper());
             return Optional.ofNullable(user);
         }catch (EmptyResultDataAccessException e) {
             return Optional.empty();
@@ -47,7 +47,7 @@ public class UserJdbcRepository implements UserRepository {
         params.addValue("id", id);
 
         try {
-            User user = template.queryForObject(sql, params, userMapper.defaultUserMapper());
+            User user = template.queryForObject(sql, params, userJdbcMapper.defaultUserMapper());
             return Optional.ofNullable(user);
         }catch (EmptyResultDataAccessException e) {
             return Optional.empty();
@@ -61,7 +61,7 @@ public class UserJdbcRepository implements UserRepository {
         params.addValue("nickname", nickname);
 
         try {
-            User user = template.queryForObject(sql, params, userMapper.defaultUserMapper());
+            User user = template.queryForObject(sql, params, userJdbcMapper.defaultUserMapper());
             return Optional.ofNullable(user);
         }catch (EmptyResultDataAccessException e) {
             return Optional.empty();

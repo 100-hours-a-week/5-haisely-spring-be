@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapper {
+public class UserJdbcMapper {
     public RowMapper<User> defaultUserMapper() {
         return (rs, rowNum) -> {
             // Image 객체 설정
