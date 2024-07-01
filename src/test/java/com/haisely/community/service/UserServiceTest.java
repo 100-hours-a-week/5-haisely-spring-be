@@ -1,5 +1,6 @@
 package com.haisely.community.service;
 
+import com.haisely.community.DTO.User.EditUserContentDTO;
 import com.haisely.community.DTO.User.LoginDTO;
 import com.haisely.community.DTO.User.NewUserDTO;
 import com.haisely.community.DTO.User.UserDTO;
@@ -56,5 +57,17 @@ public class UserServiceTest {
         User u = userService.login(dto);
 
         assertEquals(u.getId(), 1);
+    }
+
+    @Test
+    public void 사용자_정보_변경() throws Exception{
+        NewUserDTO dto = new NewUserDTO("test user", "test@f.f", "pass", null);
+        User u = userService.saveUser(dto);
+
+        UserDTO saved = userService.getUserById(u.getId());
+        EditUserContentDTO edit = new EditUserContentDTO("edited", null);
+        userService.editUserInfoById(saved.userId(), edit);
+        UserDTO result = userService.getUserById(u.getId());
+        assertEquals("edited", result.nickname());
     }
 }
