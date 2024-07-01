@@ -26,7 +26,7 @@ public interface UserService {
     boolean deleteUserById(int id);
 
     // email check
-    boolean emailCheck(String email);
+    boolean emailIsPresent(String email);
     // nickname check
-    boolean nicknameCheck(String nickname);
+    boolean nicknameIsPresent(String nickname);
 }

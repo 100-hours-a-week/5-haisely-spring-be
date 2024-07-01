@@ -6,7 +6,6 @@ import com.haisely.community.DTO.User.NewUserDTO;
 import com.haisely.community.DTO.User.UserDTO;
 import com.haisely.community.Entity.User;
 import com.haisely.community.Repository.Impl.UserJdbcRepository;
-import com.haisely.community.Repository.UserRepository;
 import com.haisely.community.Service.UserService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
@@ -15,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @Transactional
@@ -69,5 +69,11 @@ public class UserServiceTest {
         userService.editUserInfoById(saved.userId(), edit);
         UserDTO result = userService.getUserById(u.getId());
         assertEquals("edited", result.nickname());
+    }
+
+    @Test
+    public void 이메일_체크() throws Exception {
+        boolean isTrue = userService.emailIsPresent("user1@example.com");
+        assertTrue(isTrue);
     }
 }

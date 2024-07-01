@@ -81,17 +81,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUserById(int id) {
+        // user 지우고
+        // board 지우고
+        // comment 지우기
         return false;
     }
 
     @Override
-    public boolean emailCheck(String email) {
-        return false;
+    public boolean emailIsPresent(String email) {
+        return userRepository.findUserByEmailAndDeletedAtIsNull(email).isPresent();
     }
 
     @Override
-    public boolean nicknameCheck(String nickname) {
-        return false;
+    public boolean nicknameIsPresent(String nickname) {
+        return userRepository.findUserByNicknameAndDeletedAtIsNull(nickname).isPresent();
     }
 
     private Image getProfileImage(String url){
