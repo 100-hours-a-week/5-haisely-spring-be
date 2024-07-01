@@ -1,6 +1,7 @@
 package com.haisely.community.DTO.User;
 
-public record UserDTO(String nickname,
+public record UserDTO( int userId,
+                      String nickname,
                       String email,
                       String profileImage) {
 }

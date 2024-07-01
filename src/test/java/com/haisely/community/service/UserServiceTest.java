@@ -1,5 +1,6 @@
 package com.haisely.community.service;
 
+import com.haisely.community.DTO.User.NewUserDTO;
 import com.haisely.community.DTO.User.UserDTO;
 import com.haisely.community.Entity.User;
 import com.haisely.community.Repository.Impl.UserJdbcRepository;
@@ -28,5 +29,14 @@ public class UserServiceTest {
     public void 사용자_조회() throws Exception{
         UserDTO u = userService.getUserById(1);
         assertEquals(u.nickname(), "user1");
+    }
+
+    @Test
+    public void 사용자_사진과_함께_저장() throws Exception{
+        NewUserDTO dto = new NewUserDTO("test user", "test@f.f", "pass", "imageurl");
+        User u = userService.saveUser(dto);
+
+        UserDTO saved = userService.getUserById(u.getId());
+        assertEquals(u.getNickname(), saved.nickname());
     }
 }
