@@ -39,4 +39,13 @@ public class UserServiceTest {
         UserDTO saved = userService.getUserById(u.getId());
         assertEquals(u.getNickname(), saved.nickname());
     }
+
+    @Test
+    public void 사용자_사진과_없이_저장() throws Exception{
+        NewUserDTO dto = new NewUserDTO("test user", "test@f.f", "pass", null);
+        User u = userService.saveUser(dto);
+
+        UserDTO saved = userService.getUserById(u.getId());
+        assertEquals("/images/default.png", saved.profileImage());
+    }
 }
