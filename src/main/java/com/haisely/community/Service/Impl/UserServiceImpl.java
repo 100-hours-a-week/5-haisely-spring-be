@@ -5,6 +5,8 @@ import com.haisely.community.Entity.Image;
 import com.haisely.community.Entity.User;
 import com.haisely.community.Exception.IncorrectUserInfoException;
 import com.haisely.community.Exception.ResourceNotFoundException;
+import com.haisely.community.Repository.BoardRepository;
+import com.haisely.community.Repository.CommentRepository;
 import com.haisely.community.Repository.ImageRepository;
 import com.haisely.community.Repository.UserRepository;
 import com.haisely.community.Service.UserService;
@@ -15,11 +17,15 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ImageRepository imageRepository;
+    private final BoardRepository boardRepository;
+    private final CommentRepository commentRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, ImageRepository imageRepository) {
+    public UserServiceImpl(UserRepository userRepository, ImageRepository imageRepository, BoardRepository boardRepository, CommentRepository commentRepository) {
         this.userRepository = userRepository;
         this.imageRepository = imageRepository;
+        this.boardRepository = boardRepository;
+        this.commentRepository = commentRepository;
     }
 
     @Override
@@ -82,6 +88,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteUserById(int id) {
         // user 지우고
+        userRepository.deleteById(id);
         // board 지우고
         // comment 지우기
         return false;
