@@ -1,5 +1,6 @@
 package com.haisely.community.service;
 
+import com.haisely.community.DTO.User.LoginDTO;
 import com.haisely.community.DTO.User.NewUserDTO;
 import com.haisely.community.DTO.User.UserDTO;
 import com.haisely.community.Entity.User;
@@ -47,5 +48,13 @@ public class UserServiceTest {
 
         UserDTO saved = userService.getUserById(u.getId());
         assertEquals("/images/default.png", saved.profileImage());
+    }
+
+    @Test
+    public void 로그인() throws Exception{
+        LoginDTO dto = new LoginDTO("user1@example.com", "password1");
+        User u = userService.login(dto);
+
+        assertEquals(u.getId(), 1);
     }
 }
