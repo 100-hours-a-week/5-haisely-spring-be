@@ -79,7 +79,7 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public BoardIdDTO editBoardById(int id, NewBoardReqDTO req) {
         Board b = boardRepository.findByIdAndDeletedAtIsNull(id)
-                .orElseThrow(()-> new ResourceNotFoundException("User not found with id"+id));
+                .orElseThrow(()-> new ResourceNotFoundException("Board not found with id"+id));
         b = b.withTitle(req.getTitle());
         b = b.withContent(req.getContent());
         b = b.withImage(saveBoardImage(req.getAttachFilePath()));
@@ -90,7 +90,9 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void deleteBoardById(int id) {
-
+        Board b = boardRepository.findByIdAndDeletedAtIsNull(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Board not found with id"+id));
+        boardRepository.deleteBoardById(b.getId());
     }
 
     private Image saveBoardImage(String url){
@@ -98,6 +100,7 @@ public class BoardServiceImpl implements BoardService {
             Image i = Image.builder()
                     .fileUrl(url)
                     .build();
+            imageRepository.save(i);
             return i;
         }
         return null;

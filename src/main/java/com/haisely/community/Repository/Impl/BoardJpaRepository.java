@@ -19,6 +19,10 @@ public interface BoardJpaRepository extends JpaRepository<Board, Integer>, Board
     // jpql은 여기서만 쓰는 거임
 
     @Modifying
+    @Query("UPDATE boards b set b.deleted_at = CURRENT_TIMESTAMP WHERE b.board_id = :#{id};")
+    void deleteBoardById(@Param("id") int id);
+
+    @Modifying
     @Query("UPDATE boards b set b.deleted_at = CURRENT_TIMESTAMP WHERE b.user_id = :#{id};")
     void deleteBoardByUserId(@Param("id") int id);
 }

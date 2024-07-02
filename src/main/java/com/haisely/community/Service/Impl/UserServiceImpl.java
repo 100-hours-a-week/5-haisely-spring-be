@@ -90,6 +90,7 @@ public class UserServiceImpl implements UserService {
         // user 지우고
         userRepository.deleteById(id);
         // board 지우고
+        boardRepository.deleteBoardByUserId(id);
         // comment 지우기
         return false;
     }
