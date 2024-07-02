@@ -14,5 +14,7 @@ public interface BoardRepository {
 
     void update(Board board);
 
+    void deleteBoardByUserId(int id);
+
     // updatedeletedatbyid 랑 user도 -> update로 해야겠네
 }

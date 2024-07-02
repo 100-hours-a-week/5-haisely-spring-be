@@ -83,6 +83,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardIdDTO editBoardById(int id, NewBoardReqDTO req) {
+
         return null;
     }
 

@@ -16,5 +16,4 @@ public interface BoardService {
     public BoardIdDTO editBoardById(int id, NewBoardReqDTO req);
     //deletebyid -> ㄹㅇ delete가 아니라 deletedat을 설정하기
     public void deleteBoardById(int id);
-    // deleteby
 }
