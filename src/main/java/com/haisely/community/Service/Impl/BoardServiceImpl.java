@@ -66,12 +66,7 @@ public class BoardServiceImpl implements BoardService {
         User u = userRepository.findUserByIdAndDeletedAtIsNull(1)
                 .orElseThrow(()-> new ResourceNotFoundException("User not found with id 1"));
         b = b.withUser(u);
-        if (req.getAttachFilePath() != null){
-            Image i = Image.builder()
-                    .fileUrl(req.getAttachFilePath())
-                    .build();
-            b = b.withImage(i);
-        }
+        b = b.withImage(saveBoardImage(req.getAttachFilePath()));
         // jpa의 dirty checking 기능이 있음
         Board board = boardRepository.save(b);
         BoardHit bh = BoardHit.builder()
@@ -83,12 +78,28 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardIdDTO editBoardById(int id, NewBoardReqDTO req) {
+        Board b = boardRepository.findByIdAndDeletedAtIsNull(id)
+                .orElseThrow(()-> new ResourceNotFoundException("User not found with id"+id));
+        b = b.withTitle(req.getTitle());
+        b = b.withContent(req.getContent());
+        b = b.withImage(saveBoardImage(req.getAttachFilePath()));
 
-        return null;
+        boardRepository.update(b);
+        return boardMapper.toBoardIdDTO(b);
     }
 
     @Override
     public void deleteBoardById(int id) {
 
+    }
+
+    private Image saveBoardImage(String url){
+        if (url != null){
+            Image i = Image.builder()
+                    .fileUrl(url)
+                    .build();
+            return i;
+        }
+        return null;
     }
 }
