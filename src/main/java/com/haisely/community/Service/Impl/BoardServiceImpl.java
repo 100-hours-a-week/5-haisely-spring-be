@@ -80,4 +80,14 @@ public class BoardServiceImpl implements BoardService {
         boardHitRepository.save(bh);
         return boardMapper.toBoardIdDTO(board);
     }
+
+    @Override
+    public BoardIdDTO editBoardById(int id, NewBoardReqDTO req) {
+        return null;
+    }
+
+    @Override
+    public void deleteBoardById(int id) {
+
+    }
 }

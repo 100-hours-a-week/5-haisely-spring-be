@@ -9,4 +9,6 @@ public interface CommentRepository {
     Optional<Comment> findCommentByIdAndDeletedAtIsNull(int id);;
 
     List<Comment> findCommentsByBoardIdAndDeletedAtIsNull(int id);
+
+    // edit  / del by id, boardid, userid
 }

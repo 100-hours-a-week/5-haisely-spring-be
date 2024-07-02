@@ -13,4 +13,6 @@ public interface BoardRepository {
     Board save(Board board);
 
     void update(Board board);
+
+    // updatedeletedatbyid 랑 user도 -> update로 해야겠네
 }
